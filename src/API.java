@@ -1,4 +1,4 @@
-import com.google.gson.Gson;
+import com.google.gson.*;
 
 import java.io.IOException;
 import java.net.URI;
@@ -24,8 +24,11 @@ public class API {
         return response.body();
     }
 
-    public Moedas getJsonResponse() {
+    public void getJsonResponse() {
         Gson json = new Gson();
-        return json.fromJson(getResponse(), Moedas.class);
+        JsonElement je = json.fromJson(getResponse(), JsonElement.class);
+        JsonObject jo = je.getAsJsonObject();
+        Moedas moedas = json.fromJson(jo.getAsJsonObject("conversion_rates"), Moedas.class);
+        //System.out.println(moedas);
     }
 }
