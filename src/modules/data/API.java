@@ -1,4 +1,7 @@
+package modules.data;
+
 import com.google.gson.*;
+import modules.classes.ConversorMoedas;
 
 import java.io.IOException;
 import java.net.URI;

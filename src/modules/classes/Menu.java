@@ -1,10 +1,13 @@
+package modules.classes;
+
+import modules.data.API;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     Scanner input = new Scanner(System.in);
     API api;
-    Menu menu;
 
     public void initializeApi() throws IOException, InterruptedException {
         api = new API();
@@ -16,7 +19,7 @@ public class Menu {
 
     public void showWelcomeMessage() {
         this.lineDecoration();
-        System.out.println("Conversor de Moedas v1");
+        System.out.println("Conversor de modules.data.Moedas v1");
         this.lineDecoration();
     }
 
@@ -82,12 +85,5 @@ public class Menu {
         this.loopConverter();
         System.out.println("Finalizando o programa :)");
         lineDecoration();
-    }
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        var menu = new Menu();
-        menu.initializeApi();
-        menu.init();
-
     }
 }
