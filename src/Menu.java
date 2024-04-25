@@ -35,18 +35,10 @@ public class Menu {
         );
     }
 
-    public void showOptionsAgain() {
+    public void nextConvert() {
         System.out.println(
                 """
-                1- Dólar Estado Unidense (USD)
-                2- Real (BRL)
-                3- Euro (EUR)
-                4- Libra Esterlina (GBP)
-                5 - Iene (JPY)
-                6 - Franco Suíço (CHF)
-                7 - Dolar Canadense (CAD)
-                8 - Renminbi/Yuan (RMB)
-                9 - Peso Argentino (ARS)
+                1 - Continuar
                 0 - Sair"""
 
         );
@@ -80,7 +72,7 @@ public class Menu {
             int currencyTo = this.getCurrencyTypeOut();
             api.getMoeda().convertCurrency(value, currencyFrom, currencyTo);
             this.lineDecoration();
-            this.showOptionsAgain();
+            this.nextConvert();
             escolha = input.nextInt();
         }
     }
