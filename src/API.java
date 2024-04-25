@@ -9,26 +9,24 @@ import java.net.http.HttpResponse;
 public class API {
     String key = "1233f8d4f4b66ad01b216eed";
     String api = "https://v6.exchangerate-api.com/v6/%s/latest/USD".formatted(key);
-
-    HttpClient client = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(api))
-            .build();
-    HttpResponse<String> response = client
-            .send(request, HttpResponse.BodyHandlers.ofString());
+    ConversorMoedas moedas;
 
     public API() throws IOException, InterruptedException {
-    }
-
-    public String getResponse() {
-        return response.body();
-    }
-
-    public void getJsonResponse() {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(api))
+                .build();
+        HttpResponse<String> response = client
+                .send(request, HttpResponse.BodyHandlers.ofString());
         Gson json = new Gson();
-        JsonElement je = json.fromJson(getResponse(), JsonElement.class);
-        JsonObject jo = je.getAsJsonObject();
-        Moedas moedas = json.fromJson(jo.getAsJsonObject("conversion_rates"), Moedas.class);
-        //System.out.println(moedas);
+        JsonElement jsonElement = json.fromJson(response.body(), JsonElement.class);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+         moedas = new ConversorMoedas(json.fromJson(jsonObject.getAsJsonObject("conversion_rates"), Moedas.class));
+        System.out.println(moedas);
     }
+
+    public ConversorMoedas getMoeda() {
+        return this.moedas;
+    }
+
 }

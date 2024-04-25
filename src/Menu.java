@@ -1,7 +1,14 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     Scanner input = new Scanner(System.in);
+    API api;
+    Menu menu;
+
+    public void initializeApi() throws IOException, InterruptedException {
+        api = new API();
+    }
 
     public void lineDecoration() {
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
@@ -24,27 +31,71 @@ public class Menu {
                 6 - Franco Suíço (CHF)
                 7 - Dolar Canadense (CAD)
                 8 - Renminbi/Yuan (RMB)
+                9 - Peso Argentino (ARS)"""
+        );
+    }
+
+    public void showOptionsAgain() {
+        System.out.println(
+                """
+                1- Dólar Estado Unidense (USD)
+                2- Real (BRL)
+                3- Euro (EUR)
+                4- Libra Esterlina (GBP)
+                5 - Iene (JPY)
+                6 - Franco Suíço (CHF)
+                7 - Dolar Canadense (CAD)
+                8 - Renminbi/Yuan (RMB)
                 9 - Peso Argentino (ARS)
                 0 - Sair"""
+
         );
     }
 
     public double getValue() {
-        System.out.println("Qual o valor em $ da primeira moeda?");
+        System.out.println("Qual valor deseja converter?");
         return input.nextDouble();
     }
 
-    public int getCoinType() {
+    public int getCurrencyTypeIn() {
+        input.nextLine();
         System.out.println("De qual moeda será feita a conversão?");
         this.showOptions();
         return input.nextInt();
     }
 
-    public void init() {
-        this.showWelcomeMessage();
+    public int getCurrencyTypeOut() {
+        this.showOptions();
+        System.out.println("Para qual moeda será feita a conversão?");
+        this.showOptions();
+        return input.nextInt();
     }
 
-    public static void main(String[] args) {
+
+    public void loopConverter() {
+        int escolha = 1;
+        while (escolha != 0) {
+            double value = this.getValue();
+            int currencyFrom = this.getCurrencyTypeIn();
+            int currencyTo = this.getCurrencyTypeOut();
+            api.getMoeda().convertCurrency(value, currencyFrom, currencyTo);
+            this.lineDecoration();
+            this.showOptionsAgain();
+            escolha = input.nextInt();
+        }
+    }
+
+    public void init() {
+        this.showWelcomeMessage();
+        this.loopConverter();
+        System.out.println("Finalizando o programa :)");
+        lineDecoration();
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         var menu = new Menu();
+        menu.initializeApi();
+        menu.init();
+
     }
 }
