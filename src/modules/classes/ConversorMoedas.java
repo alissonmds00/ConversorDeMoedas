@@ -28,7 +28,6 @@ public class ConversorMoedas {
     public void convertCurrency(double value, int initialCurrency, int finalCurrency) {
         initialCurrency--;
         finalCurrency--;
-        System.out.println("%f %f".formatted(currencies[initialCurrency], currencies[finalCurrency]));
         double result;
         double cambioTax = (currencies[finalCurrency]/usd) / (currencies[initialCurrency]/usd);
         result = cambioTax * value;

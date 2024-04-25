@@ -19,7 +19,7 @@ public class Menu {
 
     public void showWelcomeMessage() {
         this.lineDecoration();
-        System.out.println("Conversor de modules.data.Moedas v1");
+        System.out.println("Conversor de Moedas v1");
         this.lineDecoration();
     }
 
@@ -43,7 +43,6 @@ public class Menu {
                 """
                 1 - Continuar
                 0 - Sair"""
-
         );
     }
 
@@ -66,14 +65,18 @@ public class Menu {
         return input.nextInt();
     }
 
-
     public void loopConverter() {
         int escolha = 1;
         while (escolha != 0) {
             double value = this.getValue();
             int currencyFrom = this.getCurrencyTypeIn();
             int currencyTo = this.getCurrencyTypeOut();
-            api.getMoeda().convertCurrency(value, currencyFrom, currencyTo);
+            try {
+                api.getMoeda().convertCurrency(value, currencyFrom, currencyTo);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("A opção escolhida não é válida");
+                System.out.println(e);
+            }
             this.lineDecoration();
             this.nextConvert();
             escolha = input.nextInt();

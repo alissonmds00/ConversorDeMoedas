@@ -25,7 +25,6 @@ public class API {
         JsonElement jsonElement = json.fromJson(response.body(), JsonElement.class);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
          moedas = new ConversorMoedas(json.fromJson(jsonObject.getAsJsonObject("conversion_rates"), Moedas.class));
-        System.out.println(moedas);
     }
 
     public ConversorMoedas getMoeda() {
