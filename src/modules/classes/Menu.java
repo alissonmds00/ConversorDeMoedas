@@ -76,10 +76,11 @@ public class Menu {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("A opção escolhida não é válida");
                 System.out.println(e);
+            } finally {
+                this.lineDecoration();
+                this.nextConvert();
+                escolha = input.nextInt();
             }
-            this.lineDecoration();
-            this.nextConvert();
-            escolha = input.nextInt();
         }
     }
 

@@ -7,6 +7,5 @@ public class Principal {
         var menu = new Menu();
         menu.initializeApi();
         menu.init();
-
     }
 }
